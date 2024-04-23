@@ -93,7 +93,7 @@ class MenuAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    public function toString(object $object)
+    public function toString(object $object): string
     {
         return $object instanceof MenuInterface ? $object->getName() : $this->getTranslator()->trans("config.label_menu", array(), 'ProdigiousSonataMenuBundle');
     }
