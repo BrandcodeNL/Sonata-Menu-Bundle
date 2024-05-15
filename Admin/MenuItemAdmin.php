@@ -23,13 +23,9 @@ class MenuItemAdmin extends AbstractAdmin
      */
     protected $menuClass;
 
-    public function __construct(string $code, string $class, string $baseControllerName, string $menuClass)
+    public function __construct(string $menuClass)
     {
-        parent::__construct(
-            $code,
-            $class,
-            $baseControllerName
-        );
+        parent::__construct();
 
         $this->menuClass = $menuClass;
     }
