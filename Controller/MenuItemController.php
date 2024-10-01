@@ -42,7 +42,7 @@ class MenuItemController extends Controller
     /**
      * {@inheritdoc}
      */
-    protected function redirectTo($object)
+    protected function redirectTo(Request $req, object $object): RedirectResponse
     {
         $request = $this->getRequest();
         $response = parent::redirectTo($object, $request);
