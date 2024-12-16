@@ -12,22 +12,28 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class MenuController extends Controller
 {
-	/**
-	 * Manager menu items
-	 *
-	 * @param $id
-	 */
+    private MenuManager $menuManager;
+
+    public function __construct(MenuManager $menuManager)
+    {
+        $this->menuManager = $menuManager;
+    }
+    /**
+     * Manager menu items
+     *
+     * @param $id
+     */
     public function itemsAction($id)
     {
-    	$object = $this->admin->getSubject();
+        $object = $this->admin->getSubject();
         $request = $this->getRequest();
 
-    	if (empty($object)) {
+        if (empty($object)) {
             throw new NotFoundHttpException(sprintf('unable to find the object with id : %s', $id));
         }
 
         /** @var MenuManager $menuManager */
-        $menuManager = $this->container->get('prodigious_sonata_menu.manager');
+        $menuManager = $this->menuManager;
 
         if (null !== $request->get('btn_update') && $request->getMethod() == 'POST') {
 
@@ -64,9 +70,9 @@ class MenuController extends Controller
 
         $menus = $menuManager->findAll();
 
-    	return $this->renderWithExtraParams('@ProdigiousSonataMenu/Menu/menu_edit_items.html.twig', array(
+        return $this->renderWithExtraParams('@ProdigiousSonataMenu/Menu/menu_edit_items.html.twig', array(
             'menus' => $menus,
-    		'menu' => $object,
+            'menu' => $object,
             'menuItemsEnabled' => $menuItemsEnabled,
             'menuItemsDisabled' => $menuItemsDisabled
         ));

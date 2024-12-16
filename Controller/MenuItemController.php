@@ -16,7 +16,7 @@ class MenuItemController extends Controller
      */
     public function toggleAction($id)
     {
-        
+
         /** @var MenuItemInterface $object */
         $object = $this->admin->getSubject();
 
@@ -47,7 +47,7 @@ class MenuItemController extends Controller
         $request = $this->getRequest();
         $response = parent::redirectTo($object, $request);
 
-        if (null !== $request->get('btn_update_and_list') || null !== $request->get('btn_create_and_list') || null !== $request->get('btn_update_and_edit') || $this->getRestMethod() === 'DELETE') {
+        if (null !== $request->get('btn_update_and_list') || null !== $request->get('btn_create_and_list') || null !== $request->get('btn_update_and_edit') || strtoupper($request->getMethod()) === 'DELETE') {
             $url = $this->admin->generateUrl('list');
 
             if(!empty($object) && $object instanceof MenuItemInterface) {
